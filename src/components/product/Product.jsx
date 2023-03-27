@@ -8,7 +8,7 @@ const Product = (props) => {
 
   return (
     <div className="product">
-      <div className=" w-80 bg-slate-100 shadow-xl h-full">
+      <div className=" w-80 bg-slate-100 shadow-xl h-full px-4">
         <figure className="">
           <img src={img} alt="Shoes" className="rounded-xl" />
         </figure>
