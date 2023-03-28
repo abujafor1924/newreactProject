@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { addToDb, getShoppingCart } from "../../utilities/fakedb";
 import Cart from "../Card/Cart";
 
 import Product from "../product/Product";
@@ -12,9 +13,27 @@ const Shop = () => {
       .then((data) => setProducts(data));
   }, []);
 
+  useEffect(() => {
+    // console.log("products", products);
+    const storeCard = getShoppingCart();
+    const addCart = [];
+    for (const id in storeCard) {
+      // console.log(id);
+      const saveProduct = products.find((product) => product.id === id);
+      if (saveProduct) {
+        const quantity = storeCard[id];
+        saveProduct.quantity = quantity;
+        addCart.push(saveProduct);
+      }
+      // console.log(saveProduct);
+    }
+    setCard(addCart);
+  }, [products]);
+
   const handalEvent = (product) => {
     const newCard = [...card, product];
     setCard(newCard);
+    addToDb(product.id);
   };
   return (
     <div className="flex justify-between">
